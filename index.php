@@ -5,8 +5,10 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 // アクセストークンを使いCurlHTTPClientをインスタンス化
 $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient('ooNXytK / brsAZLBJnVb8fzLwOAKJNGcsPXSeb8o / NNm7IDi65U / qakqgy1z3YH7bbEOhFc3g9W5gt7oVsOdZPgTYLA84 + GRX5kCfD8Nj2kIu0P6gh3WbhVG7');
+
 // CurlHTTPClientとシークレットを使いLINEBotをインスタンス化
 $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => '64b84a919ba2fdd252f5c7ac3a60600d']);
+
 // LINE Messaging APIがリクエストに付与した署名を取得
 $signature = $_SERVER['HTTP_' . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
 
@@ -16,7 +18,8 @@ $signature = $_SERVER['HTTP_' . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATUR
 
 // 署名が正当かチェック。正当であればリクエストをパースし配列へ
 // 不正であれば例外の内容を出力
-$events = $bot->replyText(file_get_contents('php://input'), $signature);
+#$events = $bot->replyText(file_get_contents('php://input'), $signature);
+$events = $bot->parseEventRequest(file_get_contents('php://input'), $signature);
 
 /*
 try {
@@ -37,6 +40,7 @@ function replyTextMessage($bot, $replyToken, $text) {
   // 返信を行いレスポンスを取得
   // TextMessageBuilderの引数はテキスト
   $response = $bot->replyMessage($replyToken, new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($text));
+ 
   // レスポンスが異常な場合
   if (!$response->isSucceeded()) {
     // エラー内容を出力
