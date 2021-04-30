@@ -12,7 +12,9 @@ $signature = $_SERVER['HTTP_' . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATUR
 
 // 署名が正当かチェック。正当であればリクエストをパースし配列へ
 // 不正であれば例外の内容を出力
+$events = $bot->parseEventRequest(file_get_contents('php://input'), $signature);
 
+/*
 try {
   $events = $bot->parseEventRequest(file_get_contents('php://input'), $signature);
 } catch(\LINE\LINEBot\Exception\InvalidSignatureException $e) {
@@ -24,8 +26,14 @@ try {
 } catch(\LINE\LINEBot\Exception\InvalidEventRequestException $e) {
   error_log('parseEventRequest failed. InvalidEventRequestException => '.var_export($e, true));
 }
+*/
 
 // 配列に格納された各イベントをループで処理
+foreach ($events as $event) {
+  $bot->replyText($event->getReplyToken(), 'textmessage');
+}
+
+/*
 foreach ($events as $event) {
   // MessageEventクラスのインスタンスでなければ処理をスキップ
   if (!($event instanceof \LINE\LINEBot\Event\MessageEvent)) {
@@ -40,6 +48,7 @@ foreach ($events as $event) {
   // オウム返し
   $bot->replyText($event->getReplyToken(), $event->getText());
 }
+*/
 
 // テキストを返信。引数はLINEBot、返信先、テキスト
 function replyTextMessage($bot, $replyToken, $text) {
