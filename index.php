@@ -34,8 +34,8 @@ try {
 
 // 配列に格納された各イベントをループで処理
 foreach ($events as $event) {
-  #$bot->replyText($event->getReplyToken(), 'textmessage');
-  replyTextMessage($bot, $event->getReplyToken(), 'textmessage');
+  $bot->replyText($event->getReplyToken(), 'textmessage');
+  #replyTextMessage($bot, $event->getReplyToken(), 'textmessage');
 }
 
 /*
