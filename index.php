@@ -35,6 +35,17 @@ try {
 }
 */
 
+// 配列に格納された各イベントをループで処理
+foreach ($events as $event) {
+  #$bot->replyText($event->getReplyToken(), 'textmessage');
+
+  //好きなテキストを送信
+  #replyTextMessage($bot, $event->getReplyToken(), 'おやつとざぶちゃんが好き');
+
+  //画像を送信
+  replyImageMessage($bot, $event->getReplyToken(), 'https://' . $_SERVER['HTTP_HOST'] . '/imgs/original.jpg', 'https://' . $_SERVER['HTTP_HOST'] . '/imgs/preview.jpg');
+}
+
 // テキストを返信。引数はLINEBot、返信先、テキスト
 function replyTextMessage($bot, $replyToken, $text) {
   // 返信を行いレスポンスを取得
@@ -46,12 +57,6 @@ function replyTextMessage($bot, $replyToken, $text) {
     // エラー内容を出力
     error_log('Failed! '. $response->getHTTPStatus . ' ' . $response->getRawBody());
   }
-}
-
-// 配列に格納された各イベントをループで処理
-foreach ($events as $event) {
-  #$bot->replyText($event->getReplyToken(), 'textmessage');
-  replyTextMessage($bot, $event->getReplyToken(), 'おやつとざぶちゃんが好き');
 }
 
 /*
