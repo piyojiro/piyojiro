@@ -51,7 +51,7 @@ function replyTextMessage($bot, $replyToken, $text) {
 // 配列に格納された各イベントをループで処理
 foreach ($events as $event) {
   #$bot->replyText($event->getReplyToken(), 'textmessage');
-  replyTextMessage($bot, $event->getReplyToken(), 'textmessage');
+  replyTextMessage($bot, $event->getReplyToken(), 'おやつとざぶちゃんが好き');
 }
 
 /*
