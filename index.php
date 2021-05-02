@@ -43,7 +43,7 @@ foreach ($events as $event) {
   #replyTextMessage($bot, $event->getReplyToken(), 'おやつとざぶちゃんが好き');
 
   //スタンプの送信
-  replyStickerMessage($bot, $event->getReplyToken(), 2646 , 538);
+  replyStickerMessage($bot, $event->getReplyToken(), 1 , 1);
 
   //位置情報を送信
   #replyLocationMessage($bot, $event->getReplyToken(), 'LINE', '東京都渋谷区渋谷2-21-1　ヒカリエ27階', 35.659025, 139.703473);
