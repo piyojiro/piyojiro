@@ -21,7 +21,7 @@ $signature = $_SERVER['HTTP_' . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATUR
 #$events = $bot->replyText(file_get_contents('php://input'), $signature);
 $events = $bot->parseEventRequest(file_get_contents('php://input'), $signature);
 
-
+/*
 try {
   $events = $bot->parseEventRequest(file_get_contents('php://input'), $signature);
 } catch(\LINE\LINEBot\Exception\InvalidSignatureException $e) {
@@ -33,7 +33,7 @@ try {
 } catch(\LINE\LINEBot\Exception\InvalidEventRequestException $e) {
   error_log('parseEventRequest failed. InvalidEventRequestException => '.var_export($e, true));
 }
-
+*/
 
 // 配列に格納された各イベントをループで処理
 foreach ($events as $event) {
@@ -46,23 +46,25 @@ foreach ($events as $event) {
   #replyStickerMessage($bot, $event->getReplyToken(), 1 , 1);
 
   //２択の質問を行う
-  /*
+  
   replyConfirmTemplate($bot,$event->getReplyToken(),
    'ざぶちゃんの事好き？',
    'ざぶちゃんの事好き？',
    new LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder('好き','http://google.jp'),
    new LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder('嫌い','ignore'),
   );
-  */
+  
 
   //位置情報を送信
   #replyLocationMessage($bot, $event->getReplyToken(), 'LINE', '東京都渋谷区渋谷2-21-1　ヒカリエ27階', 35.659025, 139.703473);
+  
   //画像を送信
   #replyImageMessage($bot, $event->getReplyToken(), 'https://' . $_SERVER['HTTP_HOST'] . '/imgs/original.jpg', 'https://' . $_SERVER['HTTP_HOST'] . '/imgs/preview.jpg');
-
+  
+  /*
   //入力されたテキストを取得
   $location = $event->getText();
-
+  
   // 住所ID用変数
   $locationId;
   // XMLファイルをパースするクラス
@@ -130,6 +132,7 @@ foreach ($events as $event) {
     $locationId .
     'です。'
   );
+  */
 
 }
 
