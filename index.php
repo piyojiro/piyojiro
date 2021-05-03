@@ -21,7 +21,7 @@ $signature = $_SERVER['HTTP_' . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATUR
 #$events = $bot->replyText(file_get_contents('php://input'), $signature);
 $events = $bot->parseEventRequest(file_get_contents('php://input'), $signature);
 
-/*
+
 try {
   $events = $bot->parseEventRequest(file_get_contents('php://input'), $signature);
 } catch(\LINE\LINEBot\Exception\InvalidSignatureException $e) {
@@ -33,7 +33,7 @@ try {
 } catch(\LINE\LINEBot\Exception\InvalidEventRequestException $e) {
   error_log('parseEventRequest failed. InvalidEventRequestException => '.var_export($e, true));
 }
-*/
+
 
 // 配列に格納された各イベントをループで処理
 foreach ($events as $event) {
@@ -125,9 +125,9 @@ foreach ($events as $event) {
 
   replyTextMessage(
     $bot, $event->getReplyToken(),
-    $location.
+    $location .
     'の住所IDは' . 
-    $locationId.
+    $locationId .
     'です。'
   );
 
