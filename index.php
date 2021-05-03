@@ -43,11 +43,18 @@ foreach ($events as $event) {
   #replyTextMessage($bot, $event->getReplyToken(), 'おやつとざぶちゃんが好き');
 
   //スタンプの送信
-  replyStickerMessage($bot, $event->getReplyToken(), 1 , 1);
+  #replyStickerMessage($bot, $event->getReplyToken(), 1 , 1);
+
+  //２択の質問を行う
+  replyConfirmTemplate($bot,$event->getReplyToken(),
+   'ざぶちゃんの事好き？',
+   'ざぶちゃんの事好き？',
+   new LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder('好き','http://google.jp'),
+   new LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder('嫌い','ignore'),
+  );
 
   //位置情報を送信
   #replyLocationMessage($bot, $event->getReplyToken(), 'LINE', '東京都渋谷区渋谷2-21-1　ヒカリエ27階', 35.659025, 139.703473);
-
   //画像を送信
   #replyImageMessage($bot, $event->getReplyToken(), 'https://' . $_SERVER['HTTP_HOST'] . '/imgs/original.jpg', 'https://' . $_SERVER['HTTP_HOST'] . '/imgs/preview.jpg');
 }
