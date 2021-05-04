@@ -72,9 +72,15 @@ foreach ($events as $event) {
 // テキストを返信。引数はLINEBot、返信先、テキスト
 function replyTextMessage($bot, $replyToken, $text) {
   // 返信を行いレスポンスを取得
+
+  //ここから自作チャットボット
+  if($text == "ぷー" or $text == "プー"){
+    $text = "おやつとざぶちゃんが好き";
+  }
+
   // TextMessageBuilderの引数はテキスト
   $response = $bot->replyMessage($replyToken, new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($text));
- 
+
   // レスポンスが異常な場合
   if (!$response->isSucceeded()) {
     // エラー内容を出力
@@ -83,6 +89,14 @@ function replyTextMessage($bot, $replyToken, $text) {
 }
 
 /*
+if分の記入例
+$score = 90;
+if($score >= 80){
+echo “合格です！おめでとうございます！”;
+}else($score < 80){
+echo “不合格です！がんばりましょう！”
+}
+
 foreach ($events as $event) {
   // MessageEventクラスのインスタンスでなければ処理をスキップ
   if (!($event instanceof \LINE\LINEBot\Event\MessageEvent)) {
