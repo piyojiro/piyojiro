@@ -76,6 +76,8 @@ function replyTextMessage($bot, $replyToken, $text) {
   //ここから自作チャットボット
   if($text == "ぷー" or $text == "プー"){
     $text = "おやつとざぶちゃんが好き";
+  }elseif($text == "メール"){
+    mail_send();
   }
 
   // TextMessageBuilderの引数はテキスト
@@ -112,6 +114,25 @@ foreach ($events as $event) {
   $bot->replyText($event->getReplyToken(), $event->getText());
 }
 */
+
+// メールの送付
+function mail_send(){
+  mb_language("Japanese");
+  mb_internal_encoding("UTF-8");
+
+  $user_name = 'taro';
+  $to      = 'dondon12don@yahoo.co.jp';
+  $subject = 'メールテスト1';
+
+  $message =<<<EOM
+  {$user_name}さん、
+  このメールはテスト送信です。
+  http://{$_SERVER['SERVER_NAME']}
+  EOM;
+
+  $headers = 'From: piyojiro2@gmail.com' . "\r\n";
+  mb_send_mail($to, $subject, $message, $headers);
+}
 
 // 画像を返信。引数はLINEBot、返信先、画像URL、サムネイルURL
 function replyImageMessage($bot, $replyToken, $originalImageUrl, $previewImageUrl) {
