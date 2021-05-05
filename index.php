@@ -61,11 +61,6 @@ foreach ($events as $event) {
   
   //画像を送信
   #replyImageMessage($bot, $event->getReplyToken(), 'https://' . $_SERVER['HTTP_HOST'] . '/imgs/original.jpg', 'https://' . $_SERVER['HTTP_HOST'] . '/imgs/preview.jpg');
-  
-  /*
-  //入力されたテキストを取得
-  $location = $event->getText();
-  */
 
 }
 
@@ -76,8 +71,10 @@ function replyTextMessage($bot, $replyToken, $text) {
   //ここから自作チャットボット
   if($text == "ぷー" or $text == "プー"){
     $text = "おやつとざぶちゃんが好き";
-  }elseif($text == "メール"){
-    mail_send();
+  }elseif($text == "うさちゃん"){
+    $text = "おやつとざぶちゃんが好き";
+  }elseif($text == "いぬたり"){
+    $text = "おやつとざぶちゃんが好き";
   }
 
   // TextMessageBuilderの引数はテキスト
@@ -88,50 +85,6 @@ function replyTextMessage($bot, $replyToken, $text) {
     // エラー内容を出力
     error_log('Failed! '. $response->getHTTPStatus . ' ' . $response->getRawBody());
   }
-}
-
-/*
-if分の記入例
-$score = 90;
-if($score >= 80){
-echo “合格です！おめでとうございます！”;
-}else($score < 80){
-echo “不合格です！がんばりましょう！”
-}
-
-foreach ($events as $event) {
-  // MessageEventクラスのインスタンスでなければ処理をスキップ
-  if (!($event instanceof \LINE\LINEBot\Event\MessageEvent)) {
-    error_log('Non message event has come');
-    continue;
-  }
-  // TextMessageクラスのインスタンスでなければ処理をスキップ
-  if (!($event instanceof \LINE\LINEBot\Event\MessageEvent\TextMessage)) {
-    error_log('Non text message has come');
-    continue;
-  }
-  // オウム返し
-  $bot->replyText($event->getReplyToken(), $event->getText());
-}
-*/
-
-// メールの送付
-function mail_send(){
-  mb_language("Japanese");
-  mb_internal_encoding("UTF-8");
-
-  $user_name = 'taro';
-  $to      = 'dondon12don@yahoo.co.jp';
-  $subject = 'メールテスト1';
-
-  $message =<<<EOM
-  {$user_name}さん、
-  このメールはテスト送信です。
-  http://{$_SERVER['SERVER_NAME']}
-  EOM;
-
-  $headers = 'From: piyojiro2@gmail.com' . "\r\n";
-  mb_send_mail($to, $subject, $message, $headers);
 }
 
 // 画像を返信。引数はLINEBot、返信先、画像URL、サムネイルURL
@@ -252,3 +205,21 @@ function replyCarouselTemplate($bot, $replyToken, $alternativeText, $columnArray
   }
 }
 
+// メールの送付（使えない）
+function mail_send(){
+  mb_language("Japanese");
+  mb_internal_encoding("UTF-8");
+
+  $user_name = 'taro';
+  $to      = 'dondon12don@yahoo.co.jp';
+  $subject = 'メールテスト1';
+
+  $message =<<<EOM
+  {$user_name}さん、
+  このメールはテスト送信です。
+  http://{$_SERVER['SERVER_NAME']}
+  EOM;
+
+  $headers = 'From: piyojiro2@gmail.com' . "\r\n";
+  mb_send_mail($to, $subject, $message, $headers);
+}
